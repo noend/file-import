@@ -34,9 +34,6 @@ class FileProcessingLog extends Model
         'started_at' => 'datetime',
         'completed_at' => 'datetime',
         'file_size' => 'integer',
-        'total_records' => 'integer',
-        'skipped_records' => 'integer',
-        'processed_records' => 'integer',
         'failed_records' => 'integer',
     ];
 

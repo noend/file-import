@@ -83,6 +83,9 @@ class ImportFileCommand extends Command
             'file_size' => filesize($this->filePath),
             'status' => 'PROCESSING',
             'started_at' => now(),
+            'processed_records' => 0,
+            'skipped_records' => 0,
+            'failed_records' => 0,
         ]);
     }
 
