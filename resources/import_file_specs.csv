@@ -1,0 +1,479 @@
+id,start_range,end_range,length,description,record_type
+1,1,7,7,Sequence Number Area,DT
+2,8,13,6,Entry Run Number,DT
+3,14,17,4,Sequence Number (w/i the entry run),DT
+4,18,19,2,Record Identifier (DT),DT
+5,20,35,16,Merchant Account Number,DT
+6,36,39,4,Transaction Code,DT
+7,40,45,6,Association Number,DT
+8,46,68,23,Reference Number,DT
+9,69,76,8,Transaction Date (MMDDCCYY),DT
+10,77,87,11,Transaction Amount,DT
+11,88,92,5,Batch Julian Date (DDDYY),DT
+12,93,107,15,Net Deposit,DT
+13,108,126,19,Cardholder Account Number,DT
+14,127,128,2,Best Interchange Eligible,DT
+15,129,130,2,Transaction Data Condition Code,DT
+16,131,134,4,Downgrade Reason 1,DT
+17,135,138,4,Downgrade Reason 2,DT
+18,139,148,10,Downgrade Reason 3,DT
+19,149,149,1,Online Entry,DT
+20,150,150,1,ACH Flag,DT
+21,151,151,1,AUTH Source,DT
+22,152,152,1,Cardholder I/D Method,DT
+23,153,153,1,CAT Indicator,DT
+24,154,154,1,Reimbursement Attribute,DT
+25,155,155,1,Mail Order/Telephone Order Indicator,DT
+26,156,156,1,ACI (AUTH CHAR IND),DT
+27,172,172,1,Draft A Flag Possible value: Y / N,DT
+28,173,175,3,AUTH Currency Code,DT
+29,176,187,12,AUTH Amount,DT
+30,188,191,4,Validation Code,DT
+31,192,193,2,AUTH Response Code,DT
+32,194,196,3,Network Identifier - Debit,DT
+33,197,197,1,Switch Settled Indicator,DT
+34,198,199,2,POS Entry Mode,DT
+35,200,200,1,Debit/Credit Indicator,DT
+36,201,201,1,Reversal Flag,DT
+37,202,226,25,Merchant Name,DT
+38,227,232,6,Authorization Number,DT
+39,233,236,4,Reject Reason,DT
+40,237,238,2,Card Type,DT
+41,239,241,3,Currency Code,DT
+42,242,252,11,Original Transaction Amount,DT
+43,253,253,1,Foreign Card Indicator,DT
+44,254,254,1,Carryover Indicator,DT
+45,255,256,2,Extension Record Indicator,DT
+46,257,260,4,MCC Code,DT
+47,261,268,8,Terminal ID,DT
+48,269,271,3,Discover POS Entry Mode,DT
+49,272,296,25,Purchase ID,DT
+50,297,305,9,Cash Back Amount (MC),DT
+51,306,306,1,Cash Back Amount Sign +/- (MC),DT
+52,307,319,13,POS Data Code,DT
+53,320,322,3,Program Registration ID,DT
+54,323,325,3,Card type,DT
+55,326,327,2,Product ID,DT
+56,328,332,5,Submitted Interchange,DT
+57,333,338,6,System Trace Audit Number,DT
+58,339,340,2,"Discover Transaction Type
+SA - RT - CA - RS - RC - RR -
+Card Sale Credit Cash Advance Card Sale Rev Cash Advance Rev Credit Rev",DT
+59,341,346,6,Local Transaction Time,DT
+60,347,352,6,Discover Processing Code,DT
+61,353,353,1,"Commercial Card Service Indicator (CCS)
+Possible values:
+A- GSA IGOTS B- GSA Large-Ticket C- Both GSA Large-Ticket and GSA IGOTS D- Fleet E- Fleet and GSA IGOTS F- Fleet and GSA Large-Ticket G- Fleet, GSA IGOTS, and GSA Large-Ticket H- Large Ticket I- Fleet and Large-Ticket J- Visa Distribution",DT
+62,354,362,9,Mastercard Cross Border Visa ISA ASSM Fee Amount AMEX Inbound Fee,DT
+63,363,363,1,"Space - 1 -
+2 - 5 -
+no fee applied
+Mastercard Cross Border Domestic Currency
+Mastercard Cross Border Foreign Currency
+AMEX Inbound Fee",DT
+64,364,364,1,"DCC Indicator
+Possible values:
+1 - DCC performed
+Space - DCC not performed or not applicable",DT
+65,365,365,1,"Regulated Indicator
+Possible values:
+Visa
+Y-
+Blank or N -
+Mastercard
+B- 1-
+Blank or N -
+Discover
+1-
+2-
+Blank or Zero -
+Visa Regulated Debit Fee Transaction with Fraud Prevention Adjustment
+Visa Non-Regulated Transaction
+Mastercard Regulated Debit Fee Transaction
+Mastercard Regulated Debit Fee Transaction & eligible for Fraud Prevention Adjustment
+Mastercard Non-Regulated Transaction
+Discover Non-Exempt Transaction with Fraud Prevention Adjustment
+Discover Non-Exempt Transaction
+Discover Exempt Transaction (Non-Regulated)",DT
+66,366,374,9,Visa Integrity Fee,DT
+67,375,376,2,"IASF Fee Type
+Possible values:
+01 - 02 - 03 - 04 - 05 - 06 - 07 - 08 - 09 - 10 - 11 - 12 - Space -
+Canada Multi-currency purchase Canada Single currency purchase Canada Multi-currency cash Canada Single -currency cash US Single currency purchase
+US Single currency cash US Multi-currency purchase US Multi-currency cash AP Single currency cash AP Single currency purchase AP Multi-currency cash AP Muti-currency purchase No fee",DT
+68,377,387,11,IASF Fee Amount,DT
+69,388,388,1,Debit or Credit Indicator,DT
+70,389,403,15,Adjustment Amount,DT
+71,404,404,1,Debit/Credit Indicator,DT
+72,405,419,15,Cashback Fee Amount (MC),DT
+73,420,420,1,Cashback Fee Sign +/- (MC),DT
+74,421,430,10,Industry SE,DT
+75,431,450,20,Seller ID,DT
+76,451,475,25,Seller DBA,DT
+77,476,500,25,Seller Address,DT
+78,501,516,16,Seller Phone,DT
+79,517,526,10,Seller Postal Code,DT
+80,527,566,40,Seller Email,DT
+81,567,574,8,MC Lane ID,DT
+82,575,576,2,"Mastercard Transaction Integrity Class
+This value is assigned by Mastercard and
+shows the safety and security of
+the transaction and includes the final
+assessment of the validity of the card and the cardholder.
+Card and Cardholder Present:
+A1 - EMV/Token in a Secure, Trusted Environment B1 - EMV/Chip Equivalent C1 - Mag Stripe
+E1 - Key Entered U0 - Unclassified
+Card and/or Cardholder Not Present:
+A2 - Digital Transactions B2 - Authenticated Checkout C2 - Transaction Validation D2 - Enhanced Data
+E2 - Generic Messaging U0 - Unclassified",DT
+84,1,7,7,Sequence Number Area,P1
+85,8,13,6,Entry Run Number,P1
+86,14,17,4,Sequence Number (w/i the entry run),P1
+87,18,19,2,Record Identifier (P1),P1
+88,20,35,16,Merchant Account Number,P1
+89,36,39,4,Transaction Code,P1
+90,40,51,12,VAT Tax Amount (Freight),P1
+91,52,55,4,VAT Tax Rate (Freight),P1
+93,85,85,1,"Local Tax (VS, MC, AM)",P1
+94,86,97,12,Local Tax Amount,P1
+95,98,109,12,"Freight Amount (VS, MC, AM)",P1
+96,110,119,10,Destination Zip (VS),P1
+97,120,123,4,Merchant Type,P1
+98,124,135,12,"Duty Amount (VS, MC, AM)",P1
+99,136,145,10,Merchant Tax ID,P1
+100,146,155,10,"Ship from Zip Code (VS, MC)",P1
+101,156,156,1,"National Tax Included (VS, MC)",P1
+102,157,168,12,"National/ALT Tax Amount (VS, MC)",P1
+103,169,180,12,Other Tax,P1
+104,181,183,3,"Destination Country Code (VS, MC)",P1
+105,184,200,17,Merchant Reference Number,P1
+106,201,212,12,Discount Amount,P1
+107,213,232,20,Merchant VAT Registration,P1
+108,233,245,13,Customer VAT Registration,P1
+109,246,249,4,Summary Commodity Code,P1
+110,250,264,15,VAT Invoice Reference Number,P1
+111,265,270,6,Order Date,P1
+112,271,271,1,Detail Record to follow (D),P1
+140,1,7,7,Sequence Number Area,A2
+141,8,13,6,Entry Run Number,A2
+142,14,17,4,Sequence Number (w/i the entry run),A2
+143,18,19,2,Record Identifier (A2),A2
+144,20,35,16,Merchant Account Number,A2
+145,36,39,4,Transaction Code,A2
+146,40,53,14,Conjunction Ticket Number (MC/VS),A2
+147,54,54,1,"Coupon Number (VS, MC)",A2
+148,55,56,2,"Carrier Code (VS, MC)",A2
+149,57,61,5,"Flight Number (VS, MC)",A2
+150,62,63,2,"Service Class (VS, MC)",A2
+151,64,68,5,ORIG City/Airport Code (VS),A2
+152,69,69,1,"Stop Over Code (VS, MC)",A2
+153,70,74,5,"DEST City/Airport Code (VS, MC)",A2
+154,75,89,15,"Fare Basis Code (VS, MC)",A2
+155,90,95,6,"Departure/Travel Date (VS, MC)",A2
+156,96,99,4,"Departure Time (VS, MC)",A2
+157,100,103,4,"Arrival Time (VS, MC)",A2
+158,104,104,1,Departure Time Segment (MC),A2
+159,105,105,1,Arrival Time Segment (MC),A2
+160,106,120,15,Exchange Ticket (MC),A2
+161,121,132,12,Fare Amount (MC),A2
+162,133,141,9,Fee Amount (MC),A2
+163,142,150,9,Taxes Amount (MC),A2
+164,151,170,20,Endorsements/Restrictions (MC),A2
+165,171,172,2,"Extension Indicator (VS, MC)",A2
+167,1,7,7,Sequence Number Area,A1
+168,8,13,6,Entry Run Number,A1
+169,14,17,4,Sequence Number (w/i the entry run),A1
+170,18,19,2,Record Identifier (A1),A1
+171,20,35,16,Merchant Account Number,A1
+172,36,39,4,Transaction Code,A1
+173,40,41,2,Multiple Clearing Sequence Number,A1
+174,42,43,2,Multiple Clearing Sequence Count,A1
+175,44,63,20,Passenger Name,A1
+176,64,73,10,Filler,A1
+177,74,90,17,Customer Code,A1
+178,91,102,12,Total Fare Amount,A1
+179,103,114,12,Total Tax Amount,A1
+180,115,126,12,National Tax Amount,A1
+181,127,138,12,Total Fee Amount,A1
+182,139,141,3,Currency Code Amount,A1
+183,142,154,13,Exchange Ticket Number,A1
+184,155,166,12,Exchange Ticket Amount,A1
+185,167,174,8,Travel Agency Code,A1
+186,175,199,25,Travel Agency Name,A1
+187,200,214,15,Ticket Number,A1
+188,215,215,1,Internet Indicator,A1
+189,216,221,6,Issue Date,A1
+190,222,225,4,Issuing Carrier,A1
+191,226,226,1,Restricted Ticket Indicator,A1
+192,227,230,4,Computerized Reservation System,A1
+193,231,232,2,"Extension Indicator
+Possible value:
+VS MC",A1
+195,1,7,7,Sequence Number Area,P2
+196,8,13,6,Entry Run Number,P2
+197,14,17,4,Sequence Number (w/i the entry run),P2
+198,18,19,2,Record Identifier (P2),P2
+199,20,35,16,Merchant Account Number,P2
+200,36,39,4,Transaction Code,P2
+202,59,59,1,"Discount Amount Indicator
+Possible value:
+Y N",P2
+203,60,68,9,Discount Amount,P2
+204,69,83,15,Alternate Tax Identifier,P2
+205,84,95,12,"Product Code (VS, MC)",P2
+207,99,133,35,Item Description,P2
+208,134,145,12,"Item Quantity (VS, MC, AM)",P2
+209,146,157,12,"Item Unit of Measure (VS, MC)",P2
+210,158,169,12,"Unit Cost (VS, MC, AM)",P2
+211,170,170,1,Net/Gross Indicator for Extended Amount,P2
+212,171,175,5,VAT Rate applied,P2
+213,176,179,4,VAT Type Applied/VAT Rating,P2
+214,180,191,12,"VAT Amount (MC, VS)",P2
+215,192,192,1,Debit/Credit Indicator,P2
+216,193,194,2,Type of Supply,P2
+217,195,195,1,Extension Record Indicator (D),P2
+218,196,207,12,Item Commodity Code,P2
+219,208,219,12,Line Item Total,P2
+221,1,7,7,Sequence Number Area,DR
+222,8,13,6,Entry Run Number,DR
+223,14,17,4,Sequence Number (w/i the entry run),DR
+224,18,19,2,Record Identifier (DR),DR
+225,20,35,16,Merchant Account Number,DR
+226,36,39,4,Transaction Code,DR
+227,40,64,25,Purchase ID/Direct Marketing ORD Number,DR
+228,65,65,1,Address Verification Service Response,DR
+229,66,77,12,Total Authorized Amount,DR
+230,78,90,13,Merchant Customer Service Phone Number,DR
+231,91,92,2,Mail/Phone Installment Sequence Number,DR
+232,93,94,2,Mail/Phone Installment Count,DR
+233,95,96,2,Extension Record Indicator (P1),DR
+235,1,7,7,Sequence Number Area,CT
+236,8,13,6,Entry Run Number,CT
+237,14,17,4,Sequence Number (w/i the entry run),CT
+238,18,19,2,Record Identifier (CT),CT
+239,20,35,16,Merchant Account Number,CT
+240,36,39,4,Transaction Code,CT
+241,40,64,25,Purchase Identifier,CT
+242,65,65,1,No Show Indicator,CT
+243,66,71,6,Extra Charge,CT
+244,72,77,6,Check Out Date (MMDDYY),CT
+245,78,78,1,Market Specific Authorization Data Indicator,CT
+246,79,90,12,Total Authorized Amount,CT
+247,91,130,40,Renter Name,CT
+248,131,140,10,Return Location ID,CT
+249,141,142,2,Program Code,CT
+250,143,148,6,Rental Return Date (MMDDYY),CT
+251,149,157,9,Daily Rental Rate,CT
+252,158,166,9,Weekly Rental Rate,CT
+253,167,172,6,Rate Per Mile,CT
+254,173,173,1,Adjustment Amount Indicator,CT
+255,174,182,9,Fuel Charges,CT
+256,183,183,1,Insurance Indicator,CT
+257,184,192,9,Insurance Charges,CT
+258,193,194,2,Car Class Code/Rental Class,CT
+259,195,203,9,One Way Drop-Off Charges,CT
+260,204,207,4,Total Miles,CT
+261,208,211,4,Max Free Miles,CT
+262,212,213,2,"Extension Record Indicator
+Possible value:
+ON (VS) CT (MC)",CT
+263,214,215,2,Days Rented,CT
+297,1,7,7,Sequence Number Area,FT
+298,8,13,6,Entry Run Number,FT
+299,14,17,4,Sequence Number (w/i the entry run),FT
+300,18,19,2,Record Identifier (FT),FT
+301,20,35,16,Merchant Account Number,FT
+302,36,39,4,Transaction Code,FT
+303,40,43,4,Oil Company Brand Name,FT
+304,44,73,30,Merchant Street Address,FT
+305,74,82,9,Merchant Postal COD 1 and Extension,FT
+306,83,86,4,Purchase Time (HHMM 24-HR Clock),FT
+307,87,87,1,VS Service Type/MC Fuel Service Type,FT
+308,88,90,3,Motor Fuel Product Code,FT
+309,91,102,12,Unit Cost,FT
+310,103,103,1,Unit of Measure,FT
+311,104,115,12,Quantity,FT
+312,116,127,12,Gross Fuel Price,FT
+313,128,139,12,Net Fuel Price,FT
+314,140,151,12,Net Non Fuel Price,FT
+315,152,158,7,Odometer Reading,FT
+316,159,175,17,Vehicle Number,FT
+317,176,192,17,VS Cust Ref Identifier/MC Driver,FT
+318,193,195,3,VS type of Purch/MC Prod Type Code,FT
+319,196,200,5,Coupon/Discount Amount,FT
+320,201,212,12,VS ST Fuel Tax/MC Tax Amt 1,FT
+321,213,224,12,MC Tax Amount 2,FT
+322,225,236,12,Local Fuel Tax - Misc. Non-Fuel,FT
+323,237,240,4,VAT Tax Rate,FT
+324,241,242,2,Product Code 1,FT
+325,243,244,2,Product Code 2,FT
+326,245,246,2,Product Code 3,FT
+327,247,248,2,Product Code 4,FT
+328,249,250,2,Product Code 5,FT
+329,251,252,2,Product Code 6,FT
+330,253,254,2,Product Code 7,FT
+331,255,256,2,Product Code 8,FT
+332,257,268,12,VS Local Sales Tax/MC Tax Amount 3,FT
+333,269,269,1,Local Tax Included,FT
+334,270,278,9,Gross Non-Fuel Price,FT
+335,279,279,1,Misc. Fuel Tax Exemption Status,FT
+336,280,280,1,Misc. Non-Fuel Tax Exemption Status,FT
+338,1,7,7,Sequence Number Area,F2
+339,8,13,6,Entry Run Number,F2
+340,14,17,4,Sequence Number (w/i the entry run),F2
+341,18,19,2,Record Identifier (F2),F2
+342,20,35,16,Merchant Account Number,F2
+343,36,39,4,Transaction Code,F2
+344,40,42,3,Product Code,F2
+345,43,77,35,Item Description,F2
+346,78,82,5,Item Quantity,F2
+347,83,85,3,VS Item Sequence Number/MC Item Unit of Measure,F2
+348,86,94,9,Extended Item Amount,F2
+349,95,95,1,Discount Indicator,F2
+350,96,104,9,Discount Amount,F2
+351,105,105,1,Net/Gross Indicator for EXT Item A,F2
+352,106,110,5,Tax Rate Applied,F2
+353,111,114,4,Tax Type Applied,F2
+354,115,123,9,Tax Amount,F2
+355,124,124,1,Debit/Credit Indicator,F2
+356,125,139,15,VS Message ID/MC Alternate Tax ID,F2
+357,140,140,1,Extension Record Indicator,F2
+358,141,141,1,Federal Excise Tax Exemption Status,F2
+359,142,153,12,Federal Non-Fuel Excise Tax,F2
+360,154,154,1,Federal Fuel Tax Exemption Status,F2
+361,155,166,12,Federal Fuel Excise Tax,F2
+362,167,167,1,State Motor Fuel Tax Exempt Status,F2
+363,168,179,12,State Motor Fuel Tax,F2
+364,180,180,1,County Fuel Tax Exemption Status,F2
+365,181,192,12,County Fuel Sales Tax,F2
+366,193,193,1,State and Local Tax Exempt Status,F2
+367,194,205,12,State and Local Sales Tax (Non-Fuel),F2
+368,206,206,1,County Motor Fuel Tax Exempt Status,F2
+369,207,218,12,County Motor Fuel Sales Tax,F2
+370,219,219,1,City Sales Fuel Tax Exempt Status,F2
+371,220,231,12,City Sales Fuel Tax,F2
+372,232,232,1,City Motor Fuel Tax Exempt Status,F2
+373,233,244,12,City Motor Fuel Sales Tax,F2
+374,245,245,1,Secondary State Fuel Tax Exempt Status,F2
+375,246,257,12,Secondary State Fuel Tax,F2
+376,258,258,1,Reimbursement Attribute Code,F2
+377,259,259,1,Federal Sales Tax Exemption Status,F2
+378,260,271,12,Federal Sales Tax,F2
+380,1,7,7,Sequence Number Area,TH
+381,18,19,2,Record Identifier (TH),TH
+382,40,45,6,Posting Date (MMDDYY),TH
+383,46,51,6,System Date (MMDDYY),TH
+384,52,55,4,Transmit Bank,TH
+385,1,7,7,Sequence Number Area,BH
+386,8,13,6,Entry Run Number,BH
+387,14,17,4,Sequence Number (w/i the entry run),BH
+388,18,19,2,Record Identifier (BH),BH
+389,20,35,16,Merchant Account Number,BH
+390,36,39,4,Transaction Code,BH
+391,40,47,8,Batch Date (MMDDCCYY),BH
+392,48,52,5,Batch Julian Date (DDDYY),BH
+393,53,67,15,Net Deposit,BH
+394,68,71,4,Reject Reason,BH
+395,72,87,16,Merchant Reference Number,BH
+396,88,88,1,Batch Header Carry Indicator,BH
+397,89,94,6,Association Number,BH
+398,95,98,4,Merchant Bank Number,BH
+399,99,99,1,Debit/Credit Indicator,BH
+400,100,107,8,ACH Posting Date (MMDDCCYY),BH
+420,1,7,7,Sequence Number Area,AD
+421,8,13,6,Entry Run Number,AD
+422,14,17,4,Sequence Number (w/i the entry run),AD
+423,18,19,2,Record Identifier (AD),AD
+424,20,35,16,Merchant Account Number,AD
+425,36,39,4,Transaction Code,AD
+426,40,50,11,Reference Number,AD
+427,51,61,11,Adjustment Amount,AD
+428,62,69,8,Transaction Date (MMDDCCYY),AD
+429,70,70,1,Carryover Indicator,AD
+430,71,71,1,Online Entry,AD
+431,72,72,1,ACH Flag,AD
+432,73,77,5,Batch Julian Date (DDDYY),AD
+433,78,78,1,Reversal Flag,AD
+434,79,79,1,Debit/Credit Indicator,AD
+435,80,83,4,Bank Number,AD
+436,84,89,6,Association Number,AD
+437,90,97,8,Posting Date (MMDDCCYY),AD
+438,98,110,13,Chargeback Case Number,AD
+443,0,0,0,Foreign key to ddf detail,P2
+446,157,171,15,TRansaction Identification number,DT
+447,56,59,3,reserved for future,P1
+448,60,84,25,Product Identifier,P1
+449,40,58,19,Future,P2
+450,220,600,381,Future,P2
+451,111,600,390,Future,AD
+452,1,7,7,SequenceNumberArea,TT
+453,8,13,6,EntryRunNumber,TT
+454,14,17,4,SequenceNumber(w/itheentryrun),TT
+455,18,19,2,RecordIdentifier(TT),TT
+456,20,35,16,MerchantAccountNumber,TT
+457,36,39,4,TransactionCode,TT
+458,40,51,12,Number-Depositsales,TT
+459,52,66,15,DollarAmount-DepositSales,TT
+460,67,78,12,Number-DepositCredit,TT
+461,79,93,15,DollarAmount-DepositCredit,TT
+462,94,105,12,Number-CashAdvance,TT
+463,106,120,15,DollarAmount-CashAdvance,TT
+464,121,132,12,Number-NetDeposit,TT
+465,133,147,15,DollarAmount-NetDeposit,TT
+466,149,160,12,Number-MerchantAdjustment,TT
+467,161,175,15,DollarAmount-MerchantAdjustment,TT
+468,177,188,12,Number-DraftA,TT
+469,189,203,15,DollarAmount-DraftA,TT
+470,205,216,12,Number-NonFinancialDebit,TT
+471,217,231,15,DollarAmount-NonFinancialDebit,TT
+472,232,243,12,Number-NonFinancialCredit,TT
+473,244,258,15,DollarAmount-NonFinancialCredit,TT
+474,259,600,342,Reservedforfutureuse,TT
+475,97,600,504,Future,DR
+476,1,7,7,,LG
+477,8,13,6,,LG
+478,14,17,4,,LG
+479,18,19,2,,LG
+480,20,35,16,,LG
+481,36,39,4,,LG
+482,40,64,25,,LG
+483,65,74,10,,LG
+484,75,75,1,,LG
+485,76,81,6,,LG
+486,82,87,6,,LG
+487,88,88,1,,LG
+488,89,100,12,,LG
+489,101,110,10,,LG
+490,111,116,6,,LG
+491,117,118,2,,LG
+492,119,130,12,,LG
+493,131,142,12,,LG
+494,143,154,12,,LG
+495,155,166,12,,LG
+496,167,178,12,,LG
+497,179,190,12,,LG
+498,191,202,12,,LG
+499,203,205,3,,LG
+500,206,217,12,,LG
+501,218,218,1,,LG
+502,219,230,12,,LG
+503,231,242,12,,LG
+504,243,247,5,,LG
+505,248,249,2,,LG
+506,250,261,12,,LG
+507,262,600,339,,LG
+508,1,7,7,,CK
+509,8,13,6,,CK
+510,14,17,4,,CK
+511,18,19,2,,CK
+512,20,35,16,,CK
+513,36,39,4,,CK
+514,40,58,19,,CK
+515,59,67,9,,CK
+516,68,82,15,,CK
+517,83,84,2,,CK
+518,85,89,5,,CK
+519,90,95,6,,CK
+520,96,108,13,,CK
+521,109,113,5,,CK
+522,114,600,487,,CK
