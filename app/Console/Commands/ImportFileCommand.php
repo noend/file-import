@@ -22,15 +22,16 @@ class ImportFileCommand extends Command
      */
     protected $description = 'Import data from a fixed-width text file to the database';
 
-    protected $fileLog;
+    protected FileProcessingLog $fileLog;
     protected array $specsMap = [];
     protected string|array|bool|null $filePath;
     protected string|array|bool|null $fileImportId;
 
     /**
      * Execute the console command.
+     * @return int
      */
-    public function handle()
+    public function handle(): int
     {
         $this->filePath = $this->argument('path_to_file');
         $this->fileImportId = $this->argument('id');
@@ -182,7 +183,14 @@ class ImportFileCommand extends Command
 
         return true;
     }
-    protected function processLineRecord($line, $recordType, $fileRecordId): array
+
+    /**
+     * @param string $line
+     * @param string $recordType
+     * @param int $fileRecordId
+     * @return array
+     */
+    protected function processLineRecord(string $line, string $recordType, int $fileRecordId): array
     {
         $fieldValues = [];
 
@@ -200,6 +208,10 @@ class ImportFileCommand extends Command
         return $fieldValues;
     }
 
+    /**
+     * @param bool $status
+     * @return void
+     */
     protected function completeFileProcessing(bool $status): void
     {
 
@@ -247,12 +259,12 @@ class ImportFileCommand extends Command
     }
 
     /**
-     * @param $isRecordExists
+     * @param bool $isRecordExists
      * @param string $recordType
      * @param int $lineNumber
-     * @return void
+     * @return bool
      */
-    private function isRecordExistingDb($isRecordExists, string $recordType, int $lineNumber): bool
+    private function isRecordExistingDb(bool $isRecordExists, string $recordType, int $lineNumber): bool
     {
         if ($isRecordExists) {
             $this->warn("Skipping duplicate record type '{$recordType}' on line {$lineNumber}");

@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
+/**
+ * @property int $processed_records
+ * @property int $skipped_records
+ * @property int $failed_records
+ */
 class FileProcessingLog extends Model
 {
     protected $table = 'file_processing_log';
