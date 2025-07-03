@@ -9,24 +9,18 @@
 
 ## Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/yourusername/file-import.git
-   cd file-import
-   ```
-
-2. Install dependencies:
+1. Install dependencies:
    ```bash
    composer install
    ```
 
-3. Copy the environment file and configure your database:
+2. Copy the environment file and configure your database:
    ```bash
    cp .env.example .env
    php artisan key:generate
    ```
 
-4. Run migrations:
+3. Run migrations:
    ```bash
    php artisan migrate
    ```
