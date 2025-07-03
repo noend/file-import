@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Console\Commands;
 
@@ -6,7 +7,6 @@ use App\Models\FieldDefinition;
 use App\Models\FieldValue;
 use App\Models\FileProcessingLog;
 use App\Models\FileRecord;
-use App\Services\FileImporter;
 use Exception;
 use Illuminate\Console\Command;
 
@@ -34,6 +34,7 @@ class ImportFileCommand extends Command
     {
         $this->filePath = $this->argument('path_to_file');
         $this->fileImportId = $this->argument('id');
+        $status = false;
 
         if (!file_exists($this->filePath)) {
             $this->error("File not found: {$this->filePath}");
@@ -46,14 +47,18 @@ class ImportFileCommand extends Command
 
             $this->getSpecsFromCsv(self::IMPORT_FILE_SPECS_CSV);
 
+            $status = $this->processFile();
+
         } catch (Exception $e) {
             $this->error($e->getMessage());
             return 1;
+        } finally {
+            $this->completeFileProcessing($status);
         }
 
-        $this->processFile();
 
-        $this->completeFileProcessing();
+
+
 
         return 0;
     }
@@ -90,6 +95,10 @@ class ImportFileCommand extends Command
 
         $handle = fopen($csvPath, 'r');
 
+        if ($handle === false) {
+            throw new Exception("Failed to open file: {$csvPath}");
+        }
+
         // Skip header row
         fgetcsv($handle);
 
@@ -115,61 +124,63 @@ class ImportFileCommand extends Command
         fclose($handle);
     }
 
-    protected function processFile(): void
+    /**
+     * @return bool
+     * @throws Exception
+     */
+    protected function processFile(): bool
     {
         $handle = fopen($this->filePath, 'r');
+
+        if ($handle === false) {
+            throw new Exception("Failed to open file: {$this->filePath}");
+        }
+
         $lineNumber = 0;
 
         $existingImports = $this->getExistingImportIds();
 
-
         while (($line = fgets($handle)) !== false) {
             $lineNumber++;
-            $line = rtrim($line, "\r\n");
 
-            if (empty(trim($line))) {
+            if (empty($line)) {
                 continue;
             }
+
+            $line = trim($line, "\r\n");
 
             // Extract record type
             $recordType = substr($line, 17, 2);
 
-            if (count($existingImports) === 1) {
-                $isRecordExists = false;
-            } else {
-                $isRecordExists = FileRecord::whereIn('file_processing_log_id', $existingImports)
-                    ->where('raw_line_data', $line)->exists();
-            }
+            $isRecordExists = FileRecord::whereIn('file_processing_log_id', $existingImports)
+                ->where('raw_line_data', $line)->exists();
 
-            if ($isRecordExists) {
-                $this->warn("Skipping duplicate record type '{$recordType}' on line {$lineNumber}");
-                $this->fileLog->increment('skipped_records');
-                $this->fileLog->increment('total_records');
+
+
+            if ($this->isRecordTypeExisting($recordType, $lineNumber) || $this->isRecordExistingDb($isRecordExists, $recordType, $lineNumber))
+            {
                 continue;
             }
 
-            if (!isset($this->specsMap[$recordType])) {
-                $this->warn("Skipping unknown record type '{$recordType}' on line {$lineNumber}");
-                $this->fileLog->increment('failed_records');
-                $this->fileLog->increment('total_records');
-                continue;
-            }
+            $fileRecord = FileRecord::create([
+                'file_processing_log_id' => $this->fileLog->id,
+                'line_number' => $lineNumber,
+                'record_type' => $recordType,
+                'raw_line_data' => $line,
+            ]);
 
-            try {
-                $fileRecord = $this->createFileRecord($line, $lineNumber, $recordType);
-                $processedRecord = $this->processLineRecord($line, $recordType, $fileRecord->id);
-                $this->saveLineRecordValues($processedRecord);
+            $processedRecord = $this->processLineRecord($line, $recordType, $fileRecord->id);
 
-                $this->fileLog->increment('processed_records');
-                $this->fileLog->increment('total_records');
-            } catch (Exception $e) {
-                $this->error("Error processing line {$lineNumber}: " . $e->getMessage());
-                $this->fileLog->increment('failed_records');
-                $this->fileLog->increment('total_records');
-            }
+            FieldValue::insert($processedRecord);
+
+            $this->fileLog->increment('processed_records');
+            $this->fileLog->increment('total_records');
+
         }
 
         fclose($handle);
+
+        return true;
     }
     protected function processLineRecord($line, $recordType, $fileRecordId): array
     {
@@ -189,25 +200,11 @@ class ImportFileCommand extends Command
         return $fieldValues;
     }
 
-    protected function createFileRecord(string $line, int $lineNumber, string $recordType)
+    protected function completeFileProcessing(bool $status): void
     {
-        return FileRecord::create([
-            'file_processing_log_id' => $this->fileLog->id,
-            'line_number' => $lineNumber,
-            'record_type' => $recordType,
-            'raw_line_data' => $line,
-        ]);
-    }
 
-    protected function saveLineRecordValues(array $processedRecord): void
-    {
-        FieldValue::insert($processedRecord);
-    }
-
-    protected function completeFileProcessing(): void
-    {
         $this->fileLog->update([
-            'status' => 'COMPLETED',
+            'status' => $status ? 'COMPLETED' : 'FAILED',
             'completed_at' => now()
         ]);
 
@@ -229,5 +226,42 @@ class ImportFileCommand extends Command
             ->select('id')
             ->get()
             ->pluck('id');
+    }
+
+    /**
+     * @param string $recordType
+     * @param int $lineNumber
+     * @return bool
+     */
+    private function isRecordTypeExisting(string $recordType, int $lineNumber): bool
+    {
+        if (!isset($this->specsMap[$recordType])) {
+            $this->warn("Skipping unknown record type '{$recordType}' on line {$lineNumber}");
+            $this->fileLog->increment('failed_records');
+            $this->fileLog->increment('total_records');
+
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $isRecordExists
+     * @param string $recordType
+     * @param int $lineNumber
+     * @return void
+     */
+    private function isRecordExistingDb($isRecordExists, string $recordType, int $lineNumber): bool
+    {
+        if ($isRecordExists) {
+            $this->warn("Skipping duplicate record type '{$recordType}' on line {$lineNumber}");
+            $this->fileLog->increment('skipped_records');
+            $this->fileLog->increment('total_records');
+
+            return true;
+        }
+
+        return false;
     }
 }
