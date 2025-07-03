@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -39,7 +38,7 @@ return new class extends Migration
         Schema::create('field_values', function (Blueprint $table) {
             $table->id();
             $table->foreignId('record_id')->constrained('file_records')->cascadeOnDelete();
-            $table->unsignedInteger('field_definition_id', );
+            $table->unsignedInteger('field_definition_id');
             $table->text('field_value')->nullable();
             $table->index(['record_id', 'field_definition_id']);
             $table->index('field_definition_id');

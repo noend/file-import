@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace App\Console\Commands;
@@ -13,6 +14,7 @@ use Illuminate\Console\Command;
 class ImportFileCommand extends Command
 {
     const string IMPORT_FILE_SPECS_CSV = 'import_file_specs.csv';
+
     protected $signature = 'import:file {path_to_file : Path to the file to import} {id : Unique identifier for the file}';
 
     /**
@@ -23,8 +25,11 @@ class ImportFileCommand extends Command
     protected $description = 'Import data from a fixed-width text file to the database';
 
     protected FileProcessingLog $fileLog;
+
     protected array $specsMap = [];
+
     protected string|array|bool|null $filePath;
+
     protected string|array|bool|null $fileImportId;
 
     /**
@@ -39,6 +44,7 @@ class ImportFileCommand extends Command
 
         if (!file_exists($this->filePath)) {
             $this->error("File not found: {$this->filePath}");
+
             return 1;
         }
 
@@ -52,14 +58,11 @@ class ImportFileCommand extends Command
 
         } catch (Exception $e) {
             $this->error($e->getMessage());
+
             return 1;
         } finally {
             $this->completeFileProcessing($status);
         }
-
-
-
-
 
         return 0;
     }
@@ -106,9 +109,9 @@ class ImportFileCommand extends Command
         while (($row = fgetcsv($handle)) !== false) {
             if (count($row) < 6) continue;
 
-            $startRange = (int)$row[1];
-            $endRange = (int)$row[2];
-            $length = (int)$row[3];
+            $startRange = (int) $row[1];
+            $endRange = (int) $row[2];
+            $length = (int) $row[3];
             $description = $row[4] ?? '';
             $recordType = trim($row[5]);
 
@@ -118,7 +121,7 @@ class ImportFileCommand extends Command
                 'start_range' => $startRange,
                 'end_range' => $endRange,
                 'length' => $length,
-                'description' => $description
+                'description' => $description,
             ]);
         }
 
@@ -217,7 +220,7 @@ class ImportFileCommand extends Command
 
         $this->fileLog->update([
             'status' => $status ? 'COMPLETED' : 'FAILED',
-            'completed_at' => now()
+            'completed_at' => now(),
         ]);
 
         $this->info("Import completed successfully!");
